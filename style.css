@@ -64,6 +64,11 @@ svg {
     background-color:#192734; 
 }
 
+/* makes sure login flexbox works fine */
+.usernm{
+    padding-bottom: 10px;
+}
+
 /* Join Twitter Today */
 .join{
     width:380px;
@@ -90,7 +95,7 @@ svg {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 200px;
+    margin-bottom: 180px;
 }
 
 /* see what's (...) */
@@ -139,6 +144,12 @@ svg {
     background-color:#162D3F ;
 }
 
+/* forgot password? */
+.passw h1{
+    color: #1DA1D6;
+    font: 13px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    margin-left: 6px;
+}
 
 /* small login beside login boxes*/
 .loggin{
@@ -150,9 +161,10 @@ svg {
     outline:none;
     border:1px solid #1A91DA ;
     border-radius: 50px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 8px;
+    margin-bottom: 42px;
 }
+
 .loggin:hover{
     background-color:#162D3F ;
 }
