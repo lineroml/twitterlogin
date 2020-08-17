@@ -1,0 +1,154 @@
+body { /* -- color del fondo --*/
+    background-color: #15202B;
+  }
+ /* footer */
+ul {
+    list-style-type: none; 
+}
+  /* footer */
+li a{
+    padding-right:16px;
+}
+ /* logo twitter */
+.svg-left{
+    margin-top: 100px;
+    float: left;
+    width: 380px;
+}
+svg {
+    fill: white;
+    padding-right: 40px;
+}
+/* footer */
+.NavFooter ul{ 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font: 13px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    color:rgb(136, 153, 166);
+    padding-right:15px;
+    text-decoration: none;
+}
+
+/* format: login passw */
+.login {
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    font: 13px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    color:rgb(136, 153, 166);
+} 
+
+/* focused child (input box) changes father (full login box) */
+.full-input:focus-within{
+    border-bottom: 3px solid #1DA1F2;
+    color: #1DA1F2;
+}
+
+/* details of login labels */
+.login label{
+    padding-left: 5px;
+}
+
+/* full input boxes: login & pssw */
+.full-input {
+    display: inline-block;
+    padding-right: 3px;
+    margin-right: 15px;
+    border: 2px solid white;
+    background-color:#192734;
+    border: 0;
+    border-radius: 2px;
+    outline: none;
+    border-bottom: 3px solid rgb(136, 153, 166) ;
+    background-color:#192734; 
+}
+
+/* Join Twitter Today */
+.join{
+    width:380px;
+    font: 11px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* login input box: login & pssw */
+.login input{ 
+    width: 180px;
+    font: 13px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    margin: 5px;
+    border: none;
+    background-color:#192734;
+    color: white;
+    outline: none;
+} 
+
+/* container: twitter logo, see what's (...) & join twitter today */
+.princ{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 200px;
+}
+
+/* see what's (...) */
+.see {
+    width:380px;
+    font: 15px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* sign up button */
+.sign{
+    background-color:#1DA1F2;
+    font: 15px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    font-weight: bold;
+    color: white;
+    outline: none;
+    border:none;
+    width: 380px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+}
+.sign:hover{
+    background-color:#1A91DA;
+}
+
+
+/* log in button */
+.logs{
+    background-color: #15202B;
+    font: 15px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    font-weight: bold;
+    color: #1DA1D6;
+    width: 380px;
+    border:1px solid #1A91DA ;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+}
+.logs:hover{
+    background-color:#162D3F ;
+}
+
+/* small login beside login boxes*/
+.loggin{
+    background-color: #15202B;
+    font: 14px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+    font-weight: bold;
+    color: #1DA1D6;
+    width: 80px;
+    border:1px solid #1A91DA ;
+    border-radius: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.loggin:hover{
+    background-color:#162D3F ;
+}
