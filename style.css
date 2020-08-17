@@ -147,6 +147,7 @@ svg {
     font-weight: bold;
     color: #1DA1D6;
     width: 80px;
+    outline:none;
     border:1px solid #1A91DA ;
     border-radius: 50px;
     margin-top: 10px;
