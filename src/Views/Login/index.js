@@ -17,6 +17,16 @@ import SearchIcon from "@material-ui/icons/Search";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import Footer from "./../../Components/Footer";
+import Loading from '../../Components/Loading';
+import config from './../../Config/config';
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import jwt from 'jsonwebtoken';
+import axios from "axios"; 
+import {encript} from "./../../Utils/utils";
+function Alert(props) { 
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const useStyles = makeStyles((theme) => ({
   containermain: {
     //diseño del container que tiene todo
@@ -174,6 +184,84 @@ export default function Login() {
   const classes = useStyles();
   const [cuenta, setCuenta] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [globalLoading, setGlobalLoading] = React.useState(false);
+  const [alerType, setalerType] = React.useState("error");
+  const [message, setMessage] = React.useState('Argumentos no validos');
+  const [myAlert, setmyAlert] = React.useState({
+    openAlert: false,
+    vertical: "top",
+    horizontal: "center"
+  });
+  const { vertical, horizontal, openAlert } = myAlert;
+  const handleCloseGlobalLoading = () => {
+    setGlobalLoading(false);
+  };
+  const handleToggleGlobalLoading = () => {
+    setGlobalLoading(!globalLoading);
+  };
+  function handleClickAlert(newState) {
+
+    setmyAlert({ openAlert: true, ...newState });
+
+  };
+
+  const handleCloseAlert = () => {
+    setmyAlert({ ...myAlert, openAlert: false });
+  };
+  const login = (e ) => {
+    e.preventDefault();
+    if (cuenta == '' || password == '') {
+      setMessage(
+        "Asegurese de llenar todos los campos."
+      );
+      setalerType("warning")
+      handleClickAlert({ vertical: "top", horizontal: "center" });
+    } else {
+
+
+      //localStorage.setItem('tipo', 'evaluador');
+      handleToggleGlobalLoading();
+      const passwordEncripted = encript(password);
+      console.log("passwordENc ",passwordEncripted);
+      axios
+        .post(`${config.api.endpoint}/users/login`, {
+          user: cuenta,
+          password: passwordEncripted
+        })
+        .then(function (response) {
+          //console.log(response.data.docs[0]);
+          console.log(response.data.verified);
+          console.log(jwt.decode(response.data.token));
+          if (response.data.verified === true) {
+            /**
+            localStorage.setItem("nombre", response.data.docs[0].name);
+            localStorage.setItem("apellido", response.data.docs[0].lastname);
+            sessionStorage.setItem("id", response.data.docs[0]._id);
+            sessionStorage.setItem("roles", response.data.docs[0].roles);
+             */
+            //console.log('prueba: '+response.data.docs[0].roles);
+            localStorage.setItem("archivar", false);
+            sessionStorage.setItem("info", response.data.token); 
+          } else {
+            handleCloseGlobalLoading();
+            setMessage(
+              "Correo o contraseña incorrecta, por favor intente nuevamente."
+            );
+            setalerType("warning")
+            handleClickAlert({ vertical: "top", horizontal: "center" });
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          handleCloseGlobalLoading();
+          setMessage("Error contacte a soporte.")
+          handleClickAlert({ vertical: "top", horizontal: "center" });
+        });
+    }
+
+    //window.location.reload(true);
+
+  };
   return (
     /*La pantalla está dividida en 12 espacios, al asignar al grid sm={6} sabemos que cuando la pantalla sea de resolucion mayor a
        muy pequeña el grid tomará la mitad de la pantalla, y cuando sea xs={12} ese grid tomará el tamaño completo   
@@ -181,6 +269,22 @@ export default function Login() {
        */
       <div>
     <Grid container className={classes.containermain}>
+    <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          key={`${vertical},${horizontal}`}
+          open={openAlert}
+          onClose={handleCloseAlert}
+        >
+          <Alert onClose={handleCloseAlert} severity={alerType}>
+            {message}
+          </Alert>
+        </Snackbar>
+        <Loading
+          open={globalLoading}
+          setOpen={setGlobalLoading}
+          handleClose={handleCloseGlobalLoading}
+          handleToggle={handleToggleGlobalLoading}
+        />
       {" "}
       {/*Tenemos un grid container que va a tener las 2 divisiones de la pantalla */}
       <Grid
@@ -266,7 +370,7 @@ export default function Login() {
           />
         </Grid>
         <Grid item xs={12} sm={4} className={classes.alignCenter}>
-          <CustomButton disableRipple>Iniciar Sesión</CustomButton>
+          <CustomButton  onClick={e => login(e)} disableRipple>Iniciar Sesión</CustomButton>
         </Grid>
         </Hidden>
         <Grid item xs={10} sm={9} className={classes.gridwords}>
